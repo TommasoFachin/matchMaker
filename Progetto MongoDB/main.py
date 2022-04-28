@@ -1,26 +1,19 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pymongo
 import bcrypt
-import random
 
 app = Flask(__name__)
 app.secret_key = "testing"
-
-client = pymongo.MongoClient("localhost:27017")
-
-#get the database name
+client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client.get_database('Progetto')
-#get the particular collection that contains the data
-collection = db.Dati
- 
+dati = db.Dati
 
 
 
 @app.route("/", methods=['post', 'get'])
-def index():
+def registrazione():
     message = ''
-    x = random.randint(0,10000)
-    if "email" in session:
+    if "Email" in session:
         return redirect(url_for("logged_in"))
     if request.method == "POST":
         user = request.form.get("fullname")
@@ -29,39 +22,99 @@ def index():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         
-        user_found = collection.find_one({"name": user})
-        email_found = collection.find_one({"email": email})
+        user_found = dati.find_one({"name": user})
+        email_found = dati.find_one({"email": email})
         if user_found:
             message = 'There already is a user by that name'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         if email_found:
             message = 'This email already exists in database'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         if password1 != password2:
             message = 'Passwords should match!'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
+            user_input = {'Nome': user, 'Email': email, 'Password': hashed,'NomeUtente': user}
+            dati.insert_one(user_input)
+            print("Ho inserito i dati")
             
-            post={"_id":x,"Nome":user,"email":email,"password":hashed,"NomeUtente":user}
-            collection.insert_one(post)
-            user_data = collection.find_one({"Email": email})
-            new_email = user_data['email']
+            user_data = dati.find_one({"Email": email})
+            new_email = user_data['Email']
    
             return render_template('logged_in.html', email=new_email)
-    return render_template('index.html')
-
-@app.route("/inserisci")
-def ciao():
-    x = random.randint(0,10000)
-
-    db.collection.insert_one({'_id':52,'Nome': "ciao", 'Email': "ciao", 'Password': "ciao",'NomeUtente': "ciao"})
-
-
-
-
-    return ("Ciao ho inserito")
+    return render_template('registrazione.html')
     
     
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    message = 'Please login to your account'
+    if "email" in session:
+        return redirect(url_for("logged_in"))
+
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        #check if email exists in database
+        email_found = dati.find_one({"Email": email})
+        if email_found:
+            email_val = email_found['Email']
+            passwordcheck = email_found['Password']
+            #encode the password and check if it matches
+            if bcrypt.checkpw(password.encode('utf-8'), passwordcheck):
+                session["email"] = email_val
+                return redirect(url_for('logged_in'))
+            else:
+                if "email" in session:
+                    return redirect(url_for("logged_in"))
+                message = 'Wrong password'
+                return render_template('login.html', message=message)
+        else:
+            message = 'Email not found'
+            return render_template('login.html', message=message)
+    return render_template('login.html', message=message)
+    
+@app.route('/logged_in')
+def logged_in():
+    if "email" in session:
+        email = session["email"]
+        
+        return render_template('logged_in.html', email=email)
+    else:
+        return redirect(url_for("login"))    
+
+
+@app.route("/logout", methods=["POST", "GET"])
+def logout():
+    if "email" in session:
+        session.pop("email", None)
+        return render_template("login.html")
+    else:
+        return render_template('registrazione.html')
+        
+        
+        
+        
+        
+@app.route("/listapartite", methods=["POST", "GET"])
+def ListaPartite():
+    data=db.get_collection("Partite")
+    filter = {'username': 1, 'user_posts': 1, '_id': 0}
+    # partite = db.data.find_one({'email' : email, 'password' : password}, {'_id': 1})
+    uno = data.find(filter)
+    for row in uno:
+        print(row)
+    
+    # x = db.student.find({}, {"Sport":0, '_id':0,'Codice':0,'P1':0,'P2':0})
+
+    # for each_doc in x:
+        # print(each_doc)
+    
+
+
+
+    return render_template('listagame.html',**vars())
+        
 if __name__ == "__main__":
   app.run(debug=True)
