@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "626a5cfef94e70c874a1b82e"
+  },
+  "Nome": "MiticoAimen",
+  "Email": "aimen.omari02@gmail.com",
+  "Password": {
+    "$binary": {
+      "base64": "JDJiJDEyJFh0bXprQjRpeDd4UElhUTUydnRuRS5tbWRuTzBEOE1DSklTRkFDTGZPT0NGSlNBSW01YkZT",
+      "subType": "00"
+    }
+  },
+  "NomeUtente": "MiticoAimen"
+},{
+  "_id": {
+    "$oid": "626a5ede655c6b569c58d9dc"
+  },
+  "Nome": "Aimen",
+  "Email": "tommaso.fachin@gmail.com",
+  "Password": {
+    "$binary": {
+      "base64": "JDJiJDEyJDBBYTlmZnhXRU5hMUFwMi8yd3QueXU3VEhxTXp1TmlYRzFqWHB1bFhKV00zRC5CeVZKazV5",
+      "subType": "00"
+    }
+  },
+  "NomeUtente": "Aimen"
+}]

@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "626a607fcbe9c62b8be108b4"
+  },
+  "Sport": "Padel",
+  "P1": "",
+  "P2": "",
+  "Codice": "1984"
+},{
+  "_id": {
+    "$oid": "626a6a96cbe9c62b8be108c7"
+  },
+  "Sport": "Padel",
+  "Codice": 1922,
+  "P1": "",
+  "P2": ""
+}]
