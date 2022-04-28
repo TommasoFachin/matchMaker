@@ -13,7 +13,7 @@ dati = db.Dati
 @app.route("/", methods=['post', 'get'])
 def index():
     message = ''
-    if "email" in session:
+    if "Email" in session:
         return redirect(url_for("logged_in"))
     if request.method == "POST":
         user = request.form.get("fullname")
@@ -56,14 +56,14 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-       
+        #check if email exists in database
         email_found = dati.find_one({"Email": email})
         if email_found:
             email_val = email_found['Email']
             passwordcheck = email_found['Password']
-            
+            #encode the password and check if it matches
             if bcrypt.checkpw(password.encode('utf-8'), passwordcheck):
-                session["Email"] = email_val
+                session["email"] = email_val
                 return redirect(url_for('logged_in'))
             else:
                 if "email" in session:
@@ -73,12 +73,13 @@ def login():
         else:
             message = 'Email not found'
             return render_template('login.html', message=message)
-    return render_template('loggato.html')
+    return render_template('login.html', message=message)
     
 @app.route('/logged_in')
 def logged_in():
     if "email" in session:
         email = session["email"]
+        
         return render_template('logged_in.html', email=email)
     else:
         return redirect(url_for("login"))    
@@ -87,7 +88,7 @@ def logged_in():
 @app.route("/logout", methods=["POST", "GET"])
 def logout():
     if "email" in session:
-        session.pop("email", None)
+        session.pop("Email", None)
         return render_template("signout.html")
     else:
         return render_template('index.html')
