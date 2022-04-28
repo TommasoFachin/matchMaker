@@ -1,18 +1,25 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pymongo
 import bcrypt
+import random
 
 app = Flask(__name__)
 app.secret_key = "testing"
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-db = connect.Progetto
+
+client = pymongo.MongoClient("localhost:27017")
+
+#get the database name
+db = client.get_database('Progetto')
+#get the particular collection that contains the data
 collection = db.Dati
+ 
 
 
 
 @app.route("/", methods=['post', 'get'])
 def index():
     message = ''
+    x = random.randint(0,10000)
     if "email" in session:
         return redirect(url_for("logged_in"))
     if request.method == "POST":
@@ -35,16 +42,25 @@ def index():
             return render_template('index.html', message=message)
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
-            user_input = {'Nome': user, 'Email': email, 'Password': hashed,'NomeUtente': user}
-            collection.insert_one(user_input)
-            print("Ho inserito i collection")
             
+            post={"_id":x,"Nome":user,"email":email,"password":hashed,"NomeUtente":user}
+            collection.insert_one(post)
             user_data = collection.find_one({"Email": email})
-            new_email = user_data['Email']
+            new_email = user_data['email']
    
             return render_template('logged_in.html', email=new_email)
     return render_template('index.html')
-    
+
+@app.route("/inserisci")
+def ciao():
+    x = random.randint(0,10000)
+
+    db.collection.insert_one({'_id':52,'Nome': "ciao", 'Email': "ciao", 'Password': "ciao",'NomeUtente': "ciao"})
+
+
+
+
+    return ("Ciao ho inserito")
     
     
 if __name__ == "__main__":
