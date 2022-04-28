@@ -99,16 +99,18 @@ def logout():
         
 @app.route("/listapartite", methods=["POST", "GET"])
 def ListaPartite():
-    data=db.Partite
+    data=db.get_collection("Partite")
+    filter = {'username': 1, 'user_posts': 1, '_id': 0}
     # partite = db.data.find_one({'email' : email, 'password' : password}, {'_id': 1})
+    uno = data.find(filter)
+    for row in uno:
+        print(row)
     
-    partite = db.Partite.find({
- 
-},{
-   "codicepartita": 1
-}
-);
-    print(partite)
+    # x = db.student.find({}, {"Sport":0, '_id':0,'Codice':0,'P1':0,'P2':0})
+
+    # for each_doc in x:
+        # print(each_doc)
+    
 
 
 
