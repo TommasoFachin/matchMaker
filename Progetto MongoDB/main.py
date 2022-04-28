@@ -73,7 +73,7 @@ def login():
         else:
             message = 'Email not found'
             return render_template('login.html', message=message)
-    return render_template('login.html', message=message)
+    return render_template('loggato.html')
     
 @app.route('/logged_in')
 def logged_in():
