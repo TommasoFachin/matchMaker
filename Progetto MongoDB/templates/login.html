@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
+  <script src={{ url_for('static', filename='js/script1.js') }}></script>
 </head>
 <body>
   {% extends "base.html" %}
@@ -19,20 +20,64 @@
     </div>
 {% endif %}
 
-<form action="" method="post">
-  <div class="form-group">
-      <label for="InputEmail">Email address</label>
+<div class="container">
+ <form action="" method="post">
+  <div class="email">
+      <label for="InputEmail">Indirizzo Email</label>
       <input name="email" class="form-control" id="InputEmail"  placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <small id="emailHelp" class="form-text text-muted">Non condivideremo mai la tua email con nessun altro.</small>
   </div>
-    <div class="form-group">
+    <div class="pwd">
       <label for="InputPassword">Password</label>
       <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+   <a href="#" class="link">
+    forgot your password ?
+  </a>
+  <button class="register">
+    <span>Invia</span>
+  </button>
+  <button class="signin">
+    <span>Registrati</span>
+  </button>
+</form> 
+
 {% endblock %}
+</div>
 </body>
+
+
+
+<div class="container">
+  <h2>login</h2>
+  <form>
+    <input type="text" class="email" placeholder="email">
+    <br/>
+    <input type="text" class="pwd" placeholder="password">
+  </form>
+  <a href="#" class="link">
+    forgot your password ?
+  </a>
+  <br/>
+  <button class="register">
+    <span>register</span>
+  </button>
+  <button class="signin">
+    <span>sign in</span>
+  </button>
+  <h3>your registration is complete !    </h3>
+  <h3>your sign in is complete !</h3>
+  <div class="reg"></div>
+  <div class="sig"></div>
+
+ 
+ 
+</div>
+ 
+ 
+</div>
 </html>
+
+
 
 

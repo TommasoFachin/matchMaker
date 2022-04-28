@@ -26,13 +26,13 @@ def registrazione():
         user_found = dati.find_one({"name": user})
         email_found = dati.find_one({"email": email})
         if user_found:
-            message = 'There already is a user by that name'
+            message = 'Esiste già un utente con quel nome'
             return render_template('registrazione.html', message=message)
         if email_found:
-            message = 'This email already exists in database'
+            message = 'Questa email è gia esistente nel db'
             return render_template('registrazione.html', message=message)
         if password1 != password2:
-            message = 'Passwords should match!'
+            message = 'Le password non corrispondono!!'
             return render_template('registrazione.html', message=message)
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
@@ -49,7 +49,7 @@ def registrazione():
     
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    message = 'Please login to your account'
+    message = 'Fai qui il tuo login'
     if "email" in session:
         return redirect(url_for("logged_in"))
 
@@ -69,10 +69,10 @@ def login():
             else:
                 if "email" in session:
                     return redirect(url_for("logged_in"))
-                message = 'Wrong password'
+                message = 'Password sbagliata!'
                 return render_template('login.html', message=message)
         else:
-            message = 'Email not found'
+            message = 'Email non trovata'
             return render_template('login.html', message=message)
     return render_template('login.html', message=message)
     
