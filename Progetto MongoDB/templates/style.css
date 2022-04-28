@@ -1,0 +1,21 @@
+form {
+    padding: 40px;
+    background: #DDD;
+    border: 4px solid #AAA;
+    width: 360px;
+    margin: 30px auto;
+}
+body {
+    background-color: #08c!important;
+}
+
+.navbar{
+    background-color: #1a2532;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+h1{
+    font-size: 50px;
+    color: white;
+}
