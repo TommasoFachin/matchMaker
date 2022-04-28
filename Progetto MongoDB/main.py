@@ -11,7 +11,7 @@ dati = db.Dati
 
 
 @app.route("/", methods=['post', 'get'])
-def index():
+def registrazione():
     message = ''
     if "Email" in session:
         return redirect(url_for("logged_in"))
@@ -26,13 +26,13 @@ def index():
         email_found = dati.find_one({"email": email})
         if user_found:
             message = 'There already is a user by that name'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         if email_found:
             message = 'This email already exists in database'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         if password1 != password2:
             message = 'Passwords should match!'
-            return render_template('index.html', message=message)
+            return render_template('registrazione.html', message=message)
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
             user_input = {'Nome': user, 'Email': email, 'Password': hashed,'NomeUtente': user}
@@ -43,7 +43,7 @@ def index():
             new_email = user_data['Email']
    
             return render_template('logged_in.html', email=new_email)
-    return render_template('index.html')
+    return render_template('registrazione.html')
     
     
 @app.route("/login", methods=["POST", "GET"])
@@ -91,7 +91,21 @@ def logout():
         session.pop("email", None)
         return render_template("login.html")
     else:
-        return render_template('index.html')
+        return render_template('registrazione.html')
+        
+        
+        
+        
+        
+@app.route("/creapartita", methods=["POST", "GET"])
+def ListaPartita():
+    
+    
+    
+
+
+
+    return render_template('listagame.html',**vars())
         
 if __name__ == "__main__":
   app.run(debug=True)
