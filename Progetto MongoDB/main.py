@@ -97,11 +97,18 @@ def logout():
         
         
         
-@app.route("/creapartita", methods=["POST", "GET"])
-def ListaPartita():
+@app.route("/listapartite", methods=["POST", "GET"])
+def ListaPartite():
+    data=db.Partite
+    # partite = db.data.find_one({'email' : email, 'password' : password}, {'_id': 1})
     
-    
-    
+    partite = db.Partite.find({
+ 
+},{
+   "codicepartita": 1
+}
+);
+    print(partite)
 
 
 
