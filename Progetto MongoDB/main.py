@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pymongo
 import bcrypt
-
+import string
+import re
 app = Flask(__name__)
 app.secret_key = "testing"
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -99,12 +100,31 @@ def logout():
         
 @app.route("/listapartite", methods=["POST", "GET"])
 def ListaPartite():
-    data=db.get_collection("Partite")
-    filter = {'username': 1, 'user_posts': 1, '_id': 0}
+    if "email" in session:
+        email = session["email"]
+        data=db.get_collection("Partite")
+        lista = []
+    #filter = {'username': 1, 'user_posts': 1, '_id': 0}
     # partite = db.data.find_one({'email' : email, 'password' : password}, {'_id': 1})
-    uno = data.find(filter)
-    for row in uno:
-        print(row)
+        uno = data.find({},{'Sport': 1, 'Codice': 1, '_id': 0})         #stampare roba
+    # for row in uno:
+        # print(row)
+        # lista.append(row)
+        
+        
+    
+        for row in uno:
+            numero=str(row)
+            numeromodificato = re.sub("[^0-9]", "",numero)
+            lista.append(numeromodificato)
+        print(email)
+    else:
+        return redirect(url_for("login"))
+    #print(lista)
+    
+    
+    
+    
     
     # x = db.student.find({}, {"Sport":0, '_id':0,'Codice':0,'P1':0,'P2':0})
 
@@ -115,6 +135,20 @@ def ListaPartite():
 
 
     return render_template('listagame.html',**vars())
+    
+@app.route(("/partita"), methods=["POST", "GET"])    
+def Partita():
+    if "email" in session:
+        print("ciao")
+    
+    
+    
+    else:
+       return redirect(url_for("login"))
+    
+
+
+    return render_template('partita.html',**vars())
         
 if __name__ == "__main__":
   app.run(debug=True)

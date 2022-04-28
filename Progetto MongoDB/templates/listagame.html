@@ -1,5 +1,14 @@
 <title>Lista Partite</title>
+<center>
 <h1>Lista Partite</h1>
+{% for row in lista %}
+<center>
+<p>
+Partita : 
+<a href="{{url_for('Partita')}}">{{row[0]}}{{row[1]}}{{row[2]}}{{row[3]}}</a>
+</p>
 
+{% endfor %}
+</center>
 
 
