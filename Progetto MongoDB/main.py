@@ -4,9 +4,9 @@ import bcrypt
 
 app = Flask(__name__)
 app.secret_key = "testing"
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-db = connect.Progetto
-collection = db.Dati
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+db = client.get_database('Progetto')
+dati = db.Dati
 
 
 
@@ -22,8 +22,8 @@ def index():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
         
-        user_found = collection.find_one({"name": user})
-        email_found = collection.find_one({"email": email})
+        user_found = dati.find_one({"name": user})
+        email_found = dati.find_one({"email": email})
         if user_found:
             message = 'There already is a user by that name'
             return render_template('index.html', message=message)
@@ -36,10 +36,10 @@ def index():
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
             user_input = {'Nome': user, 'Email': email, 'Password': hashed,'NomeUtente': user}
-            collection.insert_one(user_input)
-            print("Ho inserito i collection")
+            dati.insert_one(user_input)
+            print("Ho inserito i dati")
             
-            user_data = collection.find_one({"Email": email})
+            user_data = dati.find_one({"Email": email})
             new_email = user_data['Email']
    
             return render_template('logged_in.html', email=new_email)
