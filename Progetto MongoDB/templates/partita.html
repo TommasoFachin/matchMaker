@@ -3,6 +3,22 @@
 <title>Partita</title>
 <center>
 <h1>Partita</h1>
+<div class="p1">
+<h3>Giocatore 1</h3>
+<h4>Il giocatore 1 è : {{email}} </h4>
+
+</div>
+
+<div class="p2">
+<h3>Giocatore 2</h3>
+<h4>Lo slot del giocatore è ancora libero!</h4>
+<form action="{{ url_for('inserisciGiocatore') }}" method="post">
+
+<input type="submit" value="ISCRIVITI">
+
+</form>
+
+</div>
 
 
 

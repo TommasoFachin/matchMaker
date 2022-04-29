@@ -139,7 +139,11 @@ def ListaPartite():
 @app.route(("/partita"), methods=["POST", "GET"])    
 def Partita():
     if "email" in session:
-        print("ciao")
+        email=session['email']
+        
+        
+        
+    
     
     
     
@@ -160,11 +164,32 @@ def creaPartita():
         
 @app.route (("/conferma"), methods=["POST", "GET"])
 def inserisciPartita():
+    data=db.get_collection("Partite")
+    email = session['email']
+    codice=request.form['codice']
+    sport = request.form['sport']
+    print (codice)
+    print (sport)
+    
+    print(email)
+    
+    data.insert_one({'Sport':sport,'Codice':codice,'P1':email,'P2':''})
+    
+    
+    
     
     
 
 
-    return render_template('confermato.html',**vars())
+    return render_template('confirmed.html',**vars())
+
+@app.route (("/IcrizioneConfermata"), methods=["POST", "GET"])
+def inserisciGiocatore():
+
+
+
+    return render_template('confirmed.html',**vars())
+    
       
 if __name__ == "__main__":
   app.run(debug=True)
