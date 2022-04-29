@@ -149,6 +149,22 @@ def Partita():
 
 
     return render_template('partita.html',**vars())
+    
+    
+@app.route (("/creaPartita"), methods=["POST", "GET"])   
+def creaPartita():
         
+        
+        
+    return render_template('creaPartita.html',**vars())
+        
+@app.route (("/conferma"), methods=["POST", "GET"])
+def inserisciPartita():
+    
+    
+
+
+    return render_template('confermato.html',**vars())
+      
 if __name__ == "__main__":
   app.run(debug=True)
