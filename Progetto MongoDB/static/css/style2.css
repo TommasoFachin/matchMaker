@@ -101,21 +101,24 @@ button{
   cursor:pointer; 
   display:inline-block;
   float:left;
+  margin-left: 5px;
   width:250px;
   height:60px;
-  margin-top:-10px;
+  margin-top:100px;
   border:none;
   font-family: 'Open Sans', sans-serif;
   text-transform:uppercase;
   color:#fff;
   -webkit-transition:.5s;
   transition:.5s;
-  &:nth-of-type(1){
+ /* &:nth-of-type(1){
     background:#673ab7;
   }
   &:nth-of-type(2){
     background:#ff5722;
-  }
+  }*/
+
+  /*
   span{
     position:absolute;
     display:block;
@@ -125,12 +128,14 @@ button{
     -webkit-transition:.5s;
     transition:.5s;
   }
-  &:hover{
+  */
+
+  /*&:hover{
     span{
       -webkit-transform:translateX(30px);
       transform:translateX(30px);
       }
-   }
+   }*/
 }
 
 .reg{
