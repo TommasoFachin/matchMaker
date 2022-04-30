@@ -11,7 +11,7 @@ dati = db.Dati
 
 
 
-@app.route("/", methods=['post', 'get'])
+@app.route("/registrazione", methods=['post', 'get'])
 def registrazione():
     message = ''
     if "Email" in session:
@@ -76,7 +76,7 @@ def login():
             return render_template('login.html', message=message)
     return render_template('login.html', message=message)
     
-@app.route('/logged_in')
+@app.route('/')
 def logged_in():
     if "email" in session:
         email = session["email"]
