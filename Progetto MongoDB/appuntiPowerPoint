@@ -1,0 +1,6 @@
+performance: il database JSON può essere caricato nella memoria e quindi può fornire risultati immediati alle query;
+flessibilità: è possibile modificarne la struttura in maniera semplice e senza preoccuparsi dello schema e delle relazioni, inoltre è possibile mettere insieme diversi tipi di dati e creare gerarchie di oggetti;
+interpretazione: la struttura ad oggetti e la sintassi permettono al database JSON di essere facilmente interpretabile sia dagli sviluppatori sia dai computer e questo consente di entrare subito in un progetto senza impegnare grosse risorse in termini di tempo;
+
+contro 
+Altra pecca è la mancanza di uno standard universale, come può essere l’SQL. Ogni database ha infatti le proprie API e il suo metodo di storing e di accesso ai dati.
