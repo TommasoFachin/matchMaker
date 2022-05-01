@@ -188,8 +188,7 @@ def inserisciPartita():
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
     server.login("padelmatchmaker@gmail.com","progetto123")
-    server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare)
-
+    server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare.encode('utf-8'))
     data.insert_one({'Sport':sport,'Codice':codice,'P1':email,'P2':''})
     
     
