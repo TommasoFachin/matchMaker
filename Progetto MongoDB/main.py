@@ -3,11 +3,18 @@ import pymongo
 import bcrypt
 import string
 import re
+import smtplib
+from flask_mail import Mail, Message
 app = Flask(__name__)
 app.secret_key = "testing"
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client.get_database('Progetto')
 dati = db.Dati
+
+mail = Mail(app)
+
+server = smtplib.SMTP("smtp.gmail.com",587)
+
 
 
 
@@ -172,7 +179,12 @@ def inserisciPartita():
     print (sport)
     
     print(email)
-    
+    messaggiodamandare = 'Ciao la tua partita è stata creata! Il codice della tua partita è {}'.format(codice)
+    server = smtplib.SMTP("smtp.gmail.com",587)
+    server.starttls()
+    server.login("padelmatchmaker@gmail.com","progetto123")
+    server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare)
+
     data.insert_one({'Sport':sport,'Codice':codice,'P1':email,'P2':''})
     
     
