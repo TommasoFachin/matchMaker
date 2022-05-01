@@ -18,6 +18,7 @@ svg{
 }
 .head{
 background-color: lightgreen;
+color: red;
 	
 }
 .form-control{
@@ -202,9 +203,9 @@ h3{
 
 footer{
 	text-align:center;
-	padding:300spx 100px;
+	padding:40px 100px;
 	line-height: 4em;
-	font-size:0.8em;
+	font-size:1em;
 	background-color:#8b0000;
 	color: #fff;
 	margin-top: 70px

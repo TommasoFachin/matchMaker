@@ -8,20 +8,30 @@
   
 
 </head>
+<header >
+<div class="head">
+<h2><center><font color="red">CREA QUI LA TUA PARTITA</font></center></h2>
+</div>
+</header>
 <body>
+
 <center>
-<h1>CREA PARTITA</h1>
+<BR><BR>
 
 
 <form action="{{ url_for('inserisciPartita') }}" method="post">
-<label for="codice">Codice Partita</label>
+<label for="codice">Inserisci Un Codice Partita</label>
+<br>
+<br>
 <input type="text" name="codice"><br>
-<label for="codice">Sport</label>
+<label for="codice">Seleziona Lo Sport</label>
+
 <select name="sport" id="sport">
+
   <option value="Padel">Padel</option>
 
 </select>
-
+<br><br>
 
 <input type="submit">
 
