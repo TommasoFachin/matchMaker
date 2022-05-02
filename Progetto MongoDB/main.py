@@ -50,11 +50,14 @@ def registrazione():
             user_data = dati.find_one({"Email": email})
             new_email = user_data['Email']
 <<<<<<< HEAD
+<<<<<<< HEAD
             # messaggiodamandare = 'Benvenuto su Padel Matchmaker! Sul nostro sito potrai organizzare partite e conoscere nuovi appassionati di padel!'
             # server = smtplib.SMTP("smtp.gmail.com",587)
             # server.starttls()
             # server.login("padelmatchmaker@gmail.com","progetto123")
             # server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare)
+=======
+>>>>>>> parent of d89f766 (Update main.py)
 =======
 >>>>>>> parent of d89f766 (Update main.py)
    
