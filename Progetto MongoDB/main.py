@@ -49,11 +49,11 @@ def registrazione():
             
             user_data = dati.find_one({"Email": email})
             new_email = user_data['Email']
-            messaggiodamandare = 'Benvenuto su Padel Matchmaker! Sul nostro sito potrai organizzare partite e conoscere nuovi appassionati di padel!'
-            server = smtplib.SMTP("smtp.gmail.com",587)
-            server.starttls()
-            server.login("padelmatchmaker@gmail.com","progetto123")
-            server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare)
+            # messaggiodamandare = 'Benvenuto su Padel Matchmaker! Sul nostro sito potrai organizzare partite e conoscere nuovi appassionati di padel!'
+            # server = smtplib.SMTP("smtp.gmail.com",587)
+            # server.starttls()
+            # server.login("padelmatchmaker@gmail.com","progetto123")
+            # server.sendmail("padelmatchmaker@gmail.com",email,messaggiodamandare)
    
             return render_template('logged_in.html', email=new_email)
     return render_template('registrazione.html')
